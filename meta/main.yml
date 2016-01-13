@@ -1,0 +1,20 @@
+---
+#dependencies:
+#  - role: telusdigital.role
+galaxy_info:
+  author: "Steven Harradine"
+  company: "TELUS digital"
+  description: "Ansible role to install Let's Encrypt, gernerate a certificate and set a cron job for renewal"
+  license: ISC
+  platforms:
+    - name: Ubuntu
+      versions:
+      - lucid
+      - precise
+      - trusty
+      - utopic
+      - vivid
+  categories:
+    - web
+    - cloud
+    - security
