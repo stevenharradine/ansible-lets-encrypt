@@ -9,7 +9,9 @@ letsencrypt_group: staff
 
 letsencrypt_name: ssl
 letsencrypt_path: /data/www
+letsencrypt_combined: no
 letsencrypt_path_public: "{{ letsencrypt_path }}/{{ letsencrypt_name }}.crt"
 letsencrypt_path_private: "{{ letsencrypt_path }}/{{ letsencrypt_name }}.key"
 letsencrypt_path_combined: "{{ letsencrypt_path }}/{{ letsencrypt_name }}.combined"
-letsencrypt_combined: no
+letsencrypt_certificate_path: "{% if letsencrypt_combined %}{{ letsencrypt_path_combined }}{% else %}{{ letsencrypt_path_public }}{% endif %}"
+
