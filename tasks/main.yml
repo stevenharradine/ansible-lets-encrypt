@@ -8,6 +8,7 @@
   file:
     path: /data/www/ssl.crt
   register: letsencrypt_certificate_exists
+  ignore_errors: yes
 
 - name: output file
   debug:
