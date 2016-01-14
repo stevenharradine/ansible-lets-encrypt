@@ -4,9 +4,9 @@
     repo: https://github.com/letsencrypt/letsencrypt
     dest: "{{ letsencrypt_source }}"
 
-#- name: request signed certificate
-#  sudo: no
-#  shell: "{{ letsencrypt_source }}/letsencrypt-auto certonly --standalone{% if letsencrypt_agree_tos %} --agree-tos {% endif %} {% if letsencrypt_email %} --email {{ letsencrypt_email }} {% endif %} -d {{ letsencrypt_domain }}"
+- name: request signed certificate
+  sudo: no
+  shell: "{{ letsencrypt_source }}/letsencrypt-auto certonly --standalone{% if letsencrypt_agree_tos %} --agree-tos {% endif %} {% if letsencrypt_email %} --email {{ letsencrypt_email }} {% endif %} -d {{ letsencrypt_domain }}"
 
 
 - name: create /data/www if does not exist
