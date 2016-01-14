@@ -2,6 +2,7 @@
 letsencrypt_domain: "{{ system_role }}.{{ project }}-{{ environment_tier }}.{{ domain }}"
 letsencrypt_agree_tos: yes
 letsencrypt_email: "webmaster@{{ domain }}"
+letsencrypt_source: /src/lets-encrypt
 
 letsencrypt_owner: root
 letsencrypt_group: staff
