@@ -1,0 +1,1 @@
+{{ letsencrypt_public_key.stdout }}
