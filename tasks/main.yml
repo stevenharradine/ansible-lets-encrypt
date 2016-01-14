@@ -5,4 +5,4 @@
     dest: /src/lets-encrypt
 
 - name: request signed certificate
-  shell: "/src/lets-encrypt/letsencrypt-auto certonly --standalone -d {{ role }}.{{ project }}-{{ environment_tier }}.{{ domain }}"
+  shell: "/src/lets-encrypt/letsencrypt-auto certonly --standalone{% if letsencrypt_agree_tos %} --agree-tos {% endif %} {% if letsencrypt_email %} --email {{ letsencrypt_email }} {% endif %} -d {{ letsencrypt_domain }}"

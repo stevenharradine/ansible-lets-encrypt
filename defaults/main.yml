@@ -1,1 +1,4 @@
 ---
+letsencrypt_domain: "{{ role }}.{{ project }}-{{ environment_tier }}.{{ domain }}"
+letsencrypt_agree_tos: yes
+letsencrypt_email: "webmaster@{{ domain }}"
