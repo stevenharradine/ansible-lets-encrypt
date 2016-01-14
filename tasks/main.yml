@@ -16,3 +16,11 @@
     owner: "{{ letsencrypt_owner }}"
     group: "{{ letsencrypt_group }}"
     mode: 0755
+
+- name: read in public data
+  shell: "cat /src/letsencrypt/live/{{ letsencrypt_domain }}/fullchain.pem"
+  register: letsencrypt_public_key
+
+- name: read in private key data
+  shell: "cat /src/letsencrypt/live/{{ letsencrypt_domain }}/privkey.pem"
+  register: letsencrypt_private_key
