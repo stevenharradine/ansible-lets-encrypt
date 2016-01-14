@@ -18,11 +18,11 @@
 
 - name: read in public data
   shell: "cat /etc/letsencrypt/live/{{ letsencrypt_domain }}/fullchain.pem"
-  register: letsencrypt_public_key
+  register: letsencrypt_public_key.stdout
 
 - name: read in private key data
   shell: "cat /etc/letsencrypt/live/{{ letsencrypt_domain }}/privkey.pem"
-  register: letsencrypt_private_key
+  register: letsencrypt_private_key.stdout
 
 - name: write combined ssl file
   template:
