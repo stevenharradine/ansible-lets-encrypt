@@ -8,10 +8,6 @@
   shell: "if [ -f /data/www/ssl.crt ]; then echo yes; else echo no; fi"
   register: letsencrypt_certificate_exists
 
-- name: output file
-  debug:
-    msg: "{{ letsencrypt_certificate_exists }}"
-
 - name: get how long the current certificate is valid for
   shell: "echo $(($(date --date=\"$(cat /data/www/ssl.crt | openssl x509 -noout -enddate 2>/dev/null | awk -F\\= '{print $2}')\" +%s)-$(date +%s)))"
   register: letsencrypt_expires_in
