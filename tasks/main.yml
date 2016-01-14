@@ -26,7 +26,7 @@
 
 - name: write combined ssl file
   template:
-    src: data/www/ssl.certificate
+    src: data/www/ssl.combined
     dest: "{{ letsencrypt_path_public }}"
     owner: "{{ letsencrypt_owner }}"
     group: "{{ letsencrypt_group }}"
