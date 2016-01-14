@@ -4,6 +4,19 @@
     repo: https://github.com/letsencrypt/letsencrypt
     dest: "{{ letsencrypt_source }}"
 
+- name: does certificate exist
+  file:
+    path: /data/www/ssl.crt
+  register: letsencrypt_certificate_exists
+
+- name: output file
+  debug:
+    msg: "{{ letsencrypt_certificate_exists }}"
+
+- name: get how long the current certificate is valid for
+  shell: "echo $(($(date --date=\"$(cat /data/www/ssl.crt | openssl x509 -noout -enddate 2>/dev/null | awk -F\\= '{print $2}')\" +%s)-$(date +%s)))"
+  register: letsencrypt_expires_in
+
 # - name: request signed certificate
 #   sudo: no
 #   shell: "{{ letsencrypt_source }}/letsencrypt-auto certonly --standalone{% if letsencrypt_agree_tos %} --agree-tos {% endif %} {% if letsencrypt_email %} --email {{ letsencrypt_email }} {% endif %} -d {{ letsencrypt_domain }}"
@@ -23,14 +36,6 @@
 - name: read in private key data
   shell: "cat /etc/letsencrypt/live/{{ letsencrypt_domain }}/privkey.pem"
   register: letsencrypt_private_key
-
-- name: get how long the current certificate is valid for
-  shell: "echo $(($(date --date=\"$(cat /data/www/ssl.crt | openssl x509 -noout -enddate 2>/dev/null | awk -F\\= '{print $2}')\" +%s)-$(date +%s)))"
-  register: letsencrypt_expires_in
-
-- name: certificate expires in output
-  debug:
-    msg: "The certificate expires in {{ letsencrypt_expires_in }}"
 
 - name: write combined ssl file
   template:
