@@ -24,6 +24,14 @@
   shell: "cat /etc/letsencrypt/live/{{ letsencrypt_domain }}/privkey.pem"
   register: letsencrypt_private_key
 
+- name: get how long the current certificate is valid for
+  shell: "echo $(($(date --date=\"$(cat /data/www/ssl.crt | openssl x509 -noout -enddate 2>/dev/null | awk -F\= '{print $2}')\" +%s)-$(date +%s)))"
+  register: letsencrypt_expires_in
+
+- name: certificate expires in output
+  debug:
+    msg: "The certificate expires in {{ letsencrypt_expires_in }}"
+
 - name: write combined ssl file
   template:
     src: data/www/ssl.combined
