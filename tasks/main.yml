@@ -5,10 +5,8 @@
     dest: "{{ letsencrypt_source }}"
 
 - name: does certificate exist
-  file:
-    path: /data/www/ssl.crt
+  shell: "if [ -f /data/www/ssl.crt ]; then echo yes; else echo no; fi"
   register: letsencrypt_certificate_exists
-  ignore_errors: yes
 
 - name: output file
   debug:
