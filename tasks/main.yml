@@ -11,8 +11,8 @@
 
 - name: create /data/www if does not exist
   file:
-    path: /data/www
+    path: "{{ letsencrypt_path }}"
     state: directory
-    user: www-data
-    group: www-data
+    owner: "{{ letsencrypt_owner }}"
+    group: "{{ letsencrypt_group }}"
     mode: 0755
