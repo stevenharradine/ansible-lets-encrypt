@@ -30,4 +30,23 @@
     dest: "{{ letsencrypt_path_combined }}"
     owner: "{{ letsencrypt_owner }}"
     group: "{{ letsencrypt_group }}"
+    mode: 0400
+  when: letsencrypt_combined
+
+- name: write ssl certificate file
+  template:
+    src: data/www/ssl.crt
+    dest: "{{ letsencrypt_path_public }}"
+    owner: "{{ letsencrypt_owner }}"
+    group: "{{ letsencrypt_group }}"
     mode: 0440
+  when: not letsencrypt_combined
+
+- name: write ssl private key file
+  template:
+    src: data/www/ssl.key
+    dest: "{{ letsencrypt_path_private }}"
+    owner: "{{ letsencrypt_owner }}"
+    group: "{{ letsencrypt_group }}"
+    mode: 0440
+  when: not letsencrypt_combined
