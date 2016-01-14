@@ -1,2 +1,2 @@
-{{ letsencrypt_public_key.stdout_lines }}
-{{ letsencrypt_private_key.stdout_lines }}
+{{ letsencrypt_public_key.stdout }}
+{{ letsencrypt_private_key.stdout }}
