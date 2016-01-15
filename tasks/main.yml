@@ -15,7 +15,7 @@
 
 - name: debug
   debug:
-    msg: "exists? {{ letsencrypt_certificate_exists.stdout }} || expire in? {{ letsencrypt_expires_in.stdout }}"
+    msg: "exists? {{ letsencrypt_certificate_exists.stdout }} || expire in? {% if letsencrypt_expires_in.stdout %}{{ letsencrypt_expires_in.stdout }}{% endif %}"
 
 - name: request signed certificate
   sudo: no
