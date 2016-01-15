@@ -11,7 +11,7 @@
 - name: get how long the current certificate is valid for
   shell: "echo $(($(date --date=\"$(cat {{ letsencrypt_certificate_path }} | openssl x509 -noout -enddate 2>/dev/null | awk -F\\= '{print $2}')\" +%s)-$(date +%s)))"
   register: letsencrypt_expires_in
-  when: letsencrypt_certificate_exists.stdout
+  when: letsencrypt_certificate_exists.stdout | bool
 
 - name: debug
   debug:
@@ -20,7 +20,7 @@
 - name: request signed certificate
   sudo: no
   shell: "{{ letsencrypt_source }}/letsencrypt-auto certonly --standalone{% if letsencrypt_agree_tos %} --agree-tos {% endif %} {% if letsencrypt_email %} --email {{ letsencrypt_email }} {% endif %} -d {{ letsencrypt_domain }}"
-  when: not letsencrypt_certificate_exists.stdout or letsencrypt_expires_in.stdout < 2592000
+  when: not letsencrypt_certificate_exists.stdout | bool or letsencrypt_expires_in.stdout | int < 2592000
 
 - name: create /data/www if does not exist
   file:
