@@ -11,7 +11,7 @@
 - name: get how long the current certificate is valid for
   shell: "echo $(($(date --date=\"$(cat {{ letsencrypt_certificate_path }} | openssl x509 -noout -enddate 2>/dev/null | awk -F\\= '{print $2}')\" +%s)-$(date +%s)))"
   register: letsencrypt_expires_in
-  when: letsencrypt_certificate_exists
+  when: letsencrypt_certificate_exists.stdout
 
 - name: debug
   debug:
