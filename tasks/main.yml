@@ -13,10 +13,6 @@
   register: letsencrypt_expires_in
   when: letsencrypt_certificate_exists.stdout | bool
 
-- name: debug
-  debug:
-    msg: "exists? {{ letsencrypt_certificate_exists.stdout }} || expire in? {% if letsencrypt_expires_in.stdout %}{{ letsencrypt_expires_in.stdout }}{% endif %}"
-
 - name: request signed certificate
   sudo: no
   shell: "{{ letsencrypt_source }}/letsencrypt-auto certonly --standalone{% if letsencrypt_agree_tos %} --agree-tos {% endif %} {% if letsencrypt_email %} --email {{ letsencrypt_email }} {% endif %} -d {{ letsencrypt_domain }}"
