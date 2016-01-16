@@ -15,4 +15,4 @@ letsencrypt_path_private: "{{ letsencrypt_path }}/{{ letsencrypt_name }}.key"
 letsencrypt_path_combined: "{{ letsencrypt_path }}/{{ letsencrypt_name }}.combined"
 letsencrypt_certificate_path: "{% if letsencrypt_combined %}{{ letsencrypt_path_combined }}{% else %}{{ letsencrypt_path_public }}{% endif %}"
 
-letsencrypt_dry_run: yes
+letsencrypt_dry_run: no
