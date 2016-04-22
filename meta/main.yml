@@ -1,6 +1,5 @@
 ---
-#dependencies:
-#  - role: telusdigital.role
+dependencies: []
 galaxy_info:
   author: "Steven Harradine"
   company: "TELUS digital"
