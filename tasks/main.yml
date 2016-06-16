@@ -1,7 +1,7 @@
 ---
-- name: Clone Lets Encrypt | git
+- name: Clone Certbot | git
   git:
-    repo: https://github.com/letsencrypt/letsencrypt
+    repo: https://github.com/certbot/certbot.git
     dest: "{{ letsencrypt_source }}"
 
 - name: does certificate exist
