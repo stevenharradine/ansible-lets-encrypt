@@ -3,7 +3,7 @@ dependencies: []
 galaxy_info:
   author: "Steven Harradine"
   company: "TELUS digital"
-  description: "Ansible role to install Let's Encrypt, gernerate a certificate and set a cron job for renewal"
+  description: "Ansible role to install Let's Encrypt(Cert-Bot), generate a certificate and set a cron job for renewal"
   license: ISC
   platforms:
     - name: Ubuntu
