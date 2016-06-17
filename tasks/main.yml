@@ -2,66 +2,66 @@
 - name: Clone Certbot | git
   git:
     repo: https://github.com/certbot/certbot.git
-    dest: "{{ letsencrypt_source }}"
+    dest: "{{ certbot_source }}"
 
 - name: does certificate exist
-  shell: "if [ -f {{ letsencrypt_certificate_path }} ]; then echo yes; else echo no; fi"
-  register: letsencrypt_certificate_exists
+  shell: "if [ -f {{ certbot_certificate_path }} ]; then echo yes; else echo no; fi"
+  register: certbot_certificate_exists
 
 - name: get how long the current certificate is valid for
-  shell: "echo $(($(date --date=\"$(cat {{ letsencrypt_certificate_path }} | openssl x509 -noout -enddate 2>/dev/null | awk -F\\= '{print $2}')\" +%s)-$(date +%s)))"
-  register: letsencrypt_expires_in
-  when: letsencrypt_certificate_exists.stdout | bool
+  shell: "echo $(($(date --date=\"$(cat {{ certbot_certificate_path }} | openssl x509 -noout -enddate 2>/dev/null | awk -F\\= '{print $2}')\" +%s)-$(date +%s)))"
+  register: certbot_expires_in
+  when: certbot_certificate_exists.stdout | bool
 
 - name: request signed certificate
   sudo: no
-  shell: "{{ letsencrypt_source }}/letsencrypt-auto certonly --standalone{% if letsencrypt_agree_tos %} --agree-tos {% endif %} {% if letsencrypt_email %} --email {{ letsencrypt_email }} {% endif %} -d {{ letsencrypt_domain }}"
-  when: (not letsencrypt_certificate_exists.stdout | bool or letsencrypt_expires_in.stdout is defined and letsencrypt_expires_in.stdout | int < 2592000) and not letsencrypt_dry_run
+  shell: "{{ certbot_source }}/certbot-auto certonly --standalone{% if certbot_agree_tos %} --agree-tos {% endif %} {% if certbot_email %} --email {{ certbot_email }} {% endif %} -d {{ certbot_domain }}"
+  when: (not certbot_certificate_exists.stdout | bool or certbot_expires_in.stdout is defined and certbot_expires_in.stdout | int < 2592000) and not certbot_dry_run
 
 - name: request signed certificate | DRY RUN
   debug:
     msg: "SIGNING CERTIFICATE DRY RUN"
-  when: letsencrypt_dry_run
+  when: certbot_dry_run
 
 - name: create /data/www if does not exist
   file:
-    path: "{{ letsencrypt_path }}"
+    path: "{{ certbot_path }}"
     state: directory
-    owner: "{{ letsencrypt_owner }}"
-    group: "{{ letsencrypt_group }}"
+    owner: "{{ certbot_owner }}"
+    group: "{{ certbot_group }}"
     mode: 0755
 
 - name: read in public data
-  shell: "cat /etc/letsencrypt/live/{{ letsencrypt_domain }}/fullchain.pem"
-  register: letsencrypt_public_key
+  shell: "cat /etc/certbot/live/{{ certbot_domain }}/fullchain.pem"
+  register: certbot_public_key
 
 - name: read in private key data
-  shell: "cat /etc/letsencrypt/live/{{ letsencrypt_domain }}/privkey.pem"
-  register: letsencrypt_private_key
+  shell: "cat /etc/certbot/live/{{ certbot_domain }}/privkey.pem"
+  register: certbot_private_key
 
 - name: write combined ssl file
   template:
     src: data/www/ssl.combined
-    dest: "{{ letsencrypt_path_combined }}"
-    owner: "{{ letsencrypt_owner }}"
-    group: "{{ letsencrypt_group }}"
+    dest: "{{ certbot_path_combined }}"
+    owner: "{{ certbot_owner }}"
+    group: "{{ certbot_group }}"
     mode: 0400
-  when: letsencrypt_combined
+  when: certbot_combined
 
 - name: write ssl certificate file
   template:
     src: data/www/ssl.crt
-    dest: "{{ letsencrypt_path_public }}"
-    owner: "{{ letsencrypt_owner }}"
-    group: "{{ letsencrypt_group }}"
+    dest: "{{ certbot_path_public }}"
+    owner: "{{ certbot_owner }}"
+    group: "{{ certbot_group }}"
     mode: 0440
-  when: not letsencrypt_combined
+  when: not certbot_combined
 
 - name: write ssl private key file
   template:
     src: data/www/ssl.key
-    dest: "{{ letsencrypt_path_private }}"
-    owner: "{{ letsencrypt_owner }}"
-    group: "{{ letsencrypt_group }}"
+    dest: "{{ certbot_path_private }}"
+    owner: "{{ certbot_owner }}"
+    group: "{{ certbot_group }}"
     mode: 0440
-  when: not letsencrypt_combined
+  when: not certbot_combined
