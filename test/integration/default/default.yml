@@ -5,3 +5,4 @@
 
   roles:
     - role: ansible-certbot
+      domain: REDACTED
