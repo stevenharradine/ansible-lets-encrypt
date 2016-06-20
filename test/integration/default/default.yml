@@ -6,3 +6,6 @@
   roles:
     - role: ansible-certbot
       domain: REDACTED
+      system_role: REDACTED
+      project: REDACTED
+      environment_tier: REDACTED
