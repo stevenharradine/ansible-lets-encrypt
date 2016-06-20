@@ -5,6 +5,7 @@
 
   roles:
     - role: ansible-certbot
+      certbot_dry_run: yes
       domain: REDACTED
       system_role: REDACTED
       project: REDACTED
