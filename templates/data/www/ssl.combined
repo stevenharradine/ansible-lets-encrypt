@@ -1,2 +1,2 @@
-{{ letsencrypt_public_key.stdout }}
-{{ letsencrypt_private_key.stdout }}
+{{ certbot_public_key.stdout }}
+{{ certbot_private_key.stdout }}
