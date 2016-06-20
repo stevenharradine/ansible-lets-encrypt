@@ -2,7 +2,7 @@
 certbot_domain: "{{ system_role }}.{{ project }}-{{ environment_tier }}.{{ domain }}"
 certbot_agree_tos: yes
 certbot_email: "webmaster@{{ domain }}"
-certbot_source: /opt/lets-encrypt
+certbot_source: /opt/cert-bot
 
 certbot_owner: root
 certbot_group: staff
