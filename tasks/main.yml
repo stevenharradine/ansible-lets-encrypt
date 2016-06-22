@@ -32,11 +32,11 @@
     mode: 0755
 
 - name: read in public data
-  shell: "cat /etc/certbot/live/{{ certbot_domain }}/fullchain.pem"
+  shell: "cat /etc/letsencrypt/live/{{ certbot_domain }}/fullchain.pem"
   register: certbot_public_key
 
 - name: read in private key data
-  shell: "cat /etc/certbot/live/{{ certbot_domain }}/privkey.pem"
+  shell: "cat /etc/letsencrypt/live/{{ certbot_domain }}/privkey.pem"
   register: certbot_private_key
 
 - name: write combined ssl file
