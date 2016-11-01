@@ -21,7 +21,7 @@ Tunables
 * ```certbot_path_private``` (string) -
 * ```certbot_path_combined``` (string) -
 * ```certbot_certificate_path``` (string) -
-* ```web_server``` (string) -
+* ```certbot_web_server``` (string) -
 
 * ```certbot_dry_run``` (boolean) -
 
