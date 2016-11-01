@@ -40,5 +40,6 @@ License
 
 Contributors
 ------------
-Steven Harradine
-[Aaron Pederson](https://aaronpederson.github.io/) | [e-mail](mailto:aaron.pederson@gmail.com) | [Twitter](https://twitter.com/GunFuSamurai)
+* Steven Harradine
+* [Aaron Pederson](https://aaronpederson.github.io/) | [e-mail](mailto:aaron.pederson@gmail.com) | [Twitter](https://twitter.com/GunFuSamurai)
+* Alex Podobnik | [e-mail](mailto:alexandar.podobnik@gmail.com)
