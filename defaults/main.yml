@@ -16,3 +16,4 @@ certbot_path_combined: "{{ certbot_path }}/{{ certbot_name }}.combined"
 certbot_certificate_path: "{% if certbot_combined %}{{ certbot_path_combined }}{% else %}{{ certbot_path_public }}{% endif %}"
 
 certbot_dry_run: no
+web_server: nginx
