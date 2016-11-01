@@ -67,4 +67,8 @@
   when: not certbot_combined
 
 - name: add cronjob to run certbot renewal
-  cron: name="run certbot once a month" special_time=monthly job="certbot renew --pre-hook "service {{ certbot_web_server }} stop" --post-hook "service {{ certbot_web_server }} start" " user=root
+  cron: 
+    name: run certbot once a month
+    special_time: monthly 
+    job: certbot renew --pre-hook "service {{ certbot_web_server }} stop" --post-hook "service {{ certbot_web_server }} start" --webroot -w {{ certbot_path }} -d {{ certbot_domain }}
+    user: root
