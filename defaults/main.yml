@@ -14,5 +14,6 @@ certbot_path_public: "{{ certbot_path }}/{{ certbot_name }}.crt"
 certbot_path_private: "{{ certbot_path }}/{{ certbot_name }}.key"
 certbot_path_combined: "{{ certbot_path }}/{{ certbot_name }}.combined"
 certbot_certificate_path: "{% if certbot_combined %}{{ certbot_path_combined }}{% else %}{{ certbot_path_public }}{% endif %}"
+certbot_web_server: nginx
 
 certbot_dry_run: no

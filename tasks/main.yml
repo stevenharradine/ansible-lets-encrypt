@@ -65,3 +65,11 @@
     group: "{{ certbot_group }}"
     mode: 0440
   when: not certbot_combined
+
+- name: add cronjob to run certbot renewal
+  cron: 
+    name: run certbot renewal script daily
+    minute: 0
+    hour: 19
+    job: certbot renew --post-hook "service {{ certbot_web_server }} reload" --webroot -w {{ certbot_path }} -d {{ certbot_domain }}
+    user: root
