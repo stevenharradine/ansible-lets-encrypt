@@ -2,6 +2,7 @@
 
 [certbot](https://github.com/certbot/certbot) is EFF's tool to obtain certs from Let's Encrypt
 
+[![Licence](https://img.shields.io/badge/Licence-MIT-blue.svg)](https://tldrlegal.com/license/mit-license)
 [![Platforms](http://img.shields.io/badge/platforms-ubuntu-lightgrey.svg?style=flat)](#)[![Build Status](https://travis-ci.org/telusdigital/ansible-certbot.svg?branch=master)](https://travis-ci.org/telusdigital/ansible-certbot)
 
 Tunables
@@ -35,10 +36,6 @@ Example Playbook
     - hosts: servers
       roles:
          - role: telusdigital.certbot
-
-License
--------
-[MIT](https://tldrlegal.com/license/mit-license)
 
 Contributors
 ------------
