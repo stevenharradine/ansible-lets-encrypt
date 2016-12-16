@@ -8,6 +8,7 @@ Tunables
 --------
 * ```certbot_domain``` (string) -
 * ```certbot_agree_tos``` (boolean) -
+* ```certbot_keep_until_expiring``` (boolean) -
 * ```certbot_email``` (string) -
 * ```certbot_source``` (string) -
 
